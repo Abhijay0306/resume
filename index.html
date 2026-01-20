@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhijay Dutta | Product Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Cursor Styles */
+        body {
+            cursor: none;
+        }
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        
+        /* Hover state for cursor */
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+            backdrop-filter: invert(1);
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Typography Tweaks */
+        .font-display {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            letter-spacing: -0.04em;
+        }
+    </style>
+</head>
+<body class="bg-[#050505] text-white font-sans selection:bg-white selection:text-black overflow-x-hidden">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-[#050505]/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <span class="font-bold text-lg tracking-tight hover-target">AD.</span>
+            <div class="flex gap-6 text-sm font-medium text-neutral-400">
+                <a href="#experience" class="hover:text-white transition-colors hover-target">Experience</a>
+                <a href="#contact" class="hover:text-white transition-colors hover-target">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col justify-center px-6 pt-20 relative max-w-7xl mx-auto">
+        <div class="reveal">
+            <p class="text-neutral-500 mb-4 font-mono text-sm tracking-widest uppercase">Based in Kolkata, India</p>
+            <h1 class="font-display text-[12vw] leading-[0.85] font-black uppercase mb-8">
+                Abhijay <br>
+                <span class="text-neutral-500">Dutta</span>
+            </h1>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 reveal delay-100">
+            <div class="text-xl md:text-2xl text-neutral-300 leading-relaxed max-w-2xl">
+                Product-focused designer with a strong technical foundation. Designing end-to-end commerce and SaaS experiences for global clients.
+            </div>
+            <div class="flex flex-col justify-end items-start md:items-end gap-4">
+                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-white/20 px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 hover-target">
+                    <span>abhijaydutta123@gmail.com</span>
+                    <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Infinite Marquee Skills -->
+    <section class="border-y border-white/10 py-8 bg-neutral-900/20 overflow-hidden reveal">
+        <div class="whitespace-nowrap flex w-[200%] animate-marquee">
+            <!-- Duplicated content for seamless loop -->
+            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-700">
+                <span>USER JOURNEY MAPPING</span>
+                <span class="text-white">INTERACTION DESIGN</span>
+                <span>FIGMA</span>
+                <span class="text-white">AI WORKFLOWS</span>
+                <span>DATA-INFORMED DESIGN</span>
+                <span class="text-white">SHOPIFY</span>
+                <span>ODOO</span>
+                <span class="text-white">NEXT.JS</span>
+                <span>ENTERPRISE UX</span>
+            </div>
+            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-700">
+                <span>USER JOURNEY MAPPING</span>
+                <span class="text-white">INTERACTION DESIGN</span>
+                <span>FIGMA</span>
+                <span class="text-white">AI WORKFLOWS</span>
+                <span>DATA-INFORMED DESIGN</span>
+                <span class="text-white">SHOPIFY</span>
+                <span>ODOO</span>
+                <span class="text-white">NEXT.JS</span>
+                <span>ENTERPRISE UX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left Sidebar (Skills & Education) -->
+        <aside class="lg:col-span-4 space-y-16 reveal h-fit lg:sticky lg:top-24">
+            
+            <!-- Core Skills -->
+            <div>
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Core Competencies</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">End-to-End Product Design</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Commerce Flows</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Admin Experiences</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Design Systems</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">A/B Testing</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">AI Explainability</span>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div>
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Education</h3>
+                <div class="space-y-4">
+                    <div class="hover-target">
+                        <h4 class="font-bold text-lg">B.Tech in Computer Science (IoT)</h4>
+                        <p class="text-neutral-400 text-sm mt-1">University of Engineering & Management, Kolkata</p>
+                        <div class="flex justify-between items-center mt-2 text-xs text-neutral-500 font-mono">
+                            <span>Graduating May 2025</span>
+                            <span>8.0 CGPA</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5">
+                        <p class="text-xs text-neutral-400"><span class="text-white font-medium">Thesis:</span> Ensuring Security and Transparency in E-Voting Systems through Blockchain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools -->
+             <div>
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Tools Stack</h3>
+                <div class="grid grid-cols-2 gap-y-2 text-sm text-neutral-400">
+                    <span>Figma / FigJam</span>
+                    <span>Adobe XD</span>
+                    <span>Jira / Confluence</span>
+                    <span>Google Analytics</span>
+                    <span>Hotjar</span>
+                    <span>Odoo / Shopify</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Content (Experience) -->
+        <div class="lg:col-span-8 space-y-20" id="experience">
+            
+            <!-- Job 1 -->
+            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+                
+                <header class="mb-6">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                        <h2 class="text-3xl font-bold hover-target">Abacus Digital</h2>
+                        <span class="font-mono text-sm text-neutral-500">Jan 2025 – Present</span>
+                    </div>
+                    <p class="text-lg text-neutral-300">Technical Solutions Engineer</p>
+                </header>
+
+                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Led <span class="text-white font-medium">end-to-end design</span> of commerce and SaaS experiences, transitioning from execution to strategy.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Partnered with Product and Sales to define workflows for billing, checkout, and admin dashboards.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Analyzed high-traffic platforms driving <span class="text-white font-medium">20-30% session growth</span> and <span class="text-white font-medium">10-15% checkout improvement</span> via flow simplification.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Designed AI-assisted customer support interfaces and automated content workflows.
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Job 2 -->
+            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+                
+                <header class="mb-6">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                        <h2 class="text-3xl font-bold hover-target">Go Bandanas</h2>
+                        <span class="font-mono text-sm text-neutral-500">Sep 2024 – Nov 2024</span>
+                    </div>
+                    <p class="text-lg text-neutral-300">Web Developer & UI/UX Intern (Remote)</p>
+                </header>
+
+                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Designed end-to-end commerce journeys on <span class="text-white font-medium">Odoo</span> for a global pet lifestyle brand.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Improved customer satisfaction by <span class="text-white font-medium">~25%</span> by iterating designs based on usability reviews.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Established consistent visual patterns to improve usability and brand coherence.
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Job 3 -->
+            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+                
+                <header class="mb-6">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                        <h2 class="text-3xl font-bold hover-target">Bharat Natural Elements</h2>
+                        <span class="font-mono text-sm text-neutral-500">Mar 2024 – Jul 2024</span>
+                    </div>
+                    <p class="text-lg text-neutral-300">Web Technologist Intern</p>
+                </header>
+
+                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Designed a complex product catalog with advanced filtering and scalable IA.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Resulted in a <span class="text-white font-medium">30% increase</span> in inbound leads and <span class="text-white font-medium">20% growth</span> in sales within three months.
+                    </li>
+                </ul>
+            </article>
+
+             <!-- Job 4 -->
+             <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+                
+                <header class="mb-6">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                        <h2 class="text-3xl font-bold hover-target">Perfect Career</h2>
+                        <span class="font-mono text-sm text-neutral-500">May 2023 – Jul 2023</span>
+                    </div>
+                    <p class="text-lg text-neutral-300">Web Developer & UI/UX Designer</p>
+                </header>
+
+                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                        Designed an admissions platform for 5,000+ users and 50+ institutions.
+                    </li>
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                         Reduced form completion time by <span class="text-white font-medium">20%</span> through iterative UX improvements.
+                    </li>
+                </ul>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-neutral-900/30 py-20" id="contact">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="font-display text-4xl md:text-6xl font-bold mb-8">Ready to collaborate?</h2>
+            
+            <div class="flex flex-wrap justify-center gap-6 mb-12">
+                <a href="mailto:abhijaydutta123@gmail.com" class="hover-target px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform">
+                    Send an Email
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="hover-target px-8 py-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
+                    LinkedIn Profile
+                </a>
+                <a href="tel:+916291444121" class="hover-target px-8 py-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
+                    +91 6291444121
+                </a>
+            </div>
+            
+            <p class="text-neutral-600 text-sm">
+                &copy; 2025 Abhijay Dutta. Designed & Engineered with bold intent.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTargets = document.querySelectorAll('.hover-target');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Add a tiny delay to the outline for fluid feel
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Add hover effect to interactive elements
+        hoverTargets.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hovered');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hovered');
+            });
+        });
+
+        // Intersection Observer for Reveal on Scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
