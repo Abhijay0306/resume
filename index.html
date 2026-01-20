@@ -13,6 +13,9 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
                     }
                 }
             }
@@ -122,7 +125,21 @@
         }
     </style>
 </head>
-<body class="bg-neutral-50 text-neutral-900 dark:bg-[#050505] dark:text-white font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 overflow-x-hidden">
+<body class="bg-neutral-50 text-neutral-900 dark:bg-[#050505] dark:text-white font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 overflow-x-hidden relative">
+
+    <!-- Geometric Background Elements -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <!-- Circle Top Right -->
+        <div class="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full border border-neutral-200 dark:border-white/5 opacity-40 dark:opacity-20 animate-spin-slow duration-[60s]"></div>
+        <!-- Circle Top Right Inner -->
+        <div class="absolute top-20 right-20 w-[300px] h-[300px] rounded-full border border-dashed border-neutral-300 dark:border-white/10 opacity-40 dark:opacity-20"></div>
+        
+        <!-- Square Bottom Left -->
+        <div class="absolute bottom-40 -left-20 w-96 h-96 border border-neutral-200 dark:border-white/5 rotate-12 opacity-40 dark:opacity-20"></div>
+        
+        <!-- Grid Dots Middle -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 40px 40px;"></div>
+    </div>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot hidden md:block"></div>
@@ -151,7 +168,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col justify-center px-6 pt-20 relative max-w-7xl mx-auto">
+    <header class="min-h-screen flex flex-col justify-center px-6 pt-20 relative max-w-7xl mx-auto z-10">
         <div class="reveal">
             <p class="text-neutral-500 mb-4 font-mono text-sm tracking-widest uppercase">Based in Kolkata, India</p>
             <h1 class="font-display text-[12vw] leading-[0.85] font-black uppercase mb-8 text-neutral-900 dark:text-white transition-colors">
@@ -160,12 +177,12 @@
             </h1>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 reveal delay-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 reveal delay-100 relative">
             <div class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl transition-colors">
                 Product-focused designer with a strong technical foundation. Designing end-to-end commerce and SaaS experiences for global clients.
             </div>
             <div class="flex flex-col justify-end items-start md:items-end gap-4">
-                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-neutral-300 dark:border-white/20 px-8 py-4 rounded-full hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 hover-target">
+                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-neutral-300 dark:border-white/20 px-8 py-4 rounded-full hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 hover-target bg-white/50 dark:bg-black/50 backdrop-blur-sm">
                     <span>abhijaydutta123@gmail.com</span>
                     <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
                 </a>
@@ -174,7 +191,7 @@
     </header>
 
     <!-- Infinite Marquee Skills -->
-    <section class="border-y border-neutral-200 dark:border-white/10 py-8 bg-neutral-100 dark:bg-neutral-900/20 overflow-hidden reveal transition-colors">
+    <section class="border-y border-neutral-200 dark:border-white/10 py-8 bg-neutral-100 dark:bg-neutral-900/20 overflow-hidden reveal transition-colors relative z-10">
         <div class="whitespace-nowrap flex w-[200%] animate-marquee">
             <!-- Duplicated content for seamless loop -->
             <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-300 dark:text-neutral-700">
@@ -203,7 +220,7 @@
     </section>
 
     <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <main class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
         
         <!-- Left Sidebar (Skills & Education) -->
         <aside class="lg:col-span-4 space-y-16 reveal h-fit lg:sticky lg:top-24">
@@ -234,10 +251,15 @@
                         </div>
                     </div>
                     <div class="pt-4 border-t border-neutral-200 dark:border-white/5">
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
                             <span class="text-neutral-900 dark:text-white font-medium">Thesis:</span> 
-                            <a href="https://scholar.google.com/scholar?q=Ensuring+Security+and+Transparency+in+E-Voting+Systems+through+Blockchain+Technology" target="_blank" class="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Ensuring Security and Transparency in E-Voting Systems through Blockchain Technology</a>
                         </p>
+                        <a href="https://scholar.google.com/scholar?q=Ensuring+Security+and+Transparency+in+E-Voting+Systems+through+Blockchain+Technology" target="_blank" class="group flex items-start gap-2 p-2 -ml-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-white/5 transition-colors hover-target">
+                            <span class="text-sm font-medium text-blue-600 dark:text-blue-400 border-b border-blue-600/20 group-hover:border-blue-600 dark:border-blue-400/20 dark:group-hover:border-blue-400 transition-colors leading-relaxed">
+                                Ensuring Security and Transparency in E-Voting Systems through Blockchain Technology
+                            </span>
+                            <i data-lucide="external-link" class="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -360,7 +382,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900/30 py-20 transition-colors" id="contact">
+    <footer class="border-t border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900/30 py-20 transition-colors relative z-10" id="contact">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="font-display text-4xl md:text-6xl font-bold mb-8 text-neutral-900 dark:text-white">Ready to collaborate?</h2>
             
@@ -382,6 +404,12 @@
         </div>
     </footer>
 
+    <!-- Floating Download Button -->
+    <a href="Abhijay_Dutta_Product_Designer.pdf" download="Abhijay_Dutta_CV.pdf" class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-neutral-900 dark:bg-white text-white dark:text-black px-6 py-4 rounded-full shadow-2xl hover:scale-105 transition-transform duration-300 group hover-target border border-neutral-800 dark:border-neutral-200">
+        <span class="font-bold tracking-wide">Download CV</span>
+        <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+    </a>
+
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
@@ -390,13 +418,30 @@
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
         
-        // Check local storage or system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
-        }
+        // 1. Check local storage or system preference on load
+        const updateTheme = () => {
+             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+        };
+        
+        // Initial check
+        updateTheme();
 
+        // 2. Listen for System Theme Changes (if user hasn't overridden manually)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!('theme' in localStorage)) {
+                if (event.matches) {
+                    html.classList.add('dark');
+                } else {
+                    html.classList.remove('dark');
+                }
+            }
+        });
+
+        // 3. Manual Toggle
         themeToggle.addEventListener('click', () => {
             html.classList.toggle('dark');
             if (html.classList.contains('dark')) {
