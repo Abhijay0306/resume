@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhijay Dutta | Product Designer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         /* Custom Cursor Styles */
         body {
             cursor: none;
         }
+        /* Mobile: Reset cursor to default */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+        }
+        
         .cursor-dot,
         .cursor-outline {
             position: fixed;
@@ -21,24 +40,37 @@
             z-index: 9999;
             pointer-events: none;
         }
+        
+        /* Light Mode Cursor */
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: white;
+            background-color: #000;
         }
         .cursor-outline {
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+
+        /* Dark Mode Cursor Overrides */
+        .dark .cursor-dot {
+            background-color: #fff;
+        }
+        .dark .cursor-outline {
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         /* Hover state for cursor */
         body:hover .cursor-outline.hovered {
             width: 60px;
             height: 60px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
             border-color: transparent;
+        }
+        .dark body:hover .cursor-outline.hovered {
+            background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: invert(1);
         }
 
@@ -67,12 +99,19 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: transparent;
         }
         ::-webkit-scrollbar-thumb {
+            background: #d4d4d4;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
             background: #333;
         }
         ::-webkit-scrollbar-thumb:hover {
+            background: #a3a3a3;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
 
@@ -83,19 +122,30 @@
         }
     </style>
 </head>
-<body class="bg-[#050505] text-white font-sans selection:bg-white selection:text-black overflow-x-hidden">
+<body class="bg-neutral-50 text-neutral-900 dark:bg-[#050505] dark:text-white font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 overflow-x-hidden">
 
     <!-- Custom Cursor -->
     <div class="cursor-dot hidden md:block"></div>
     <div class="cursor-outline hidden md:block"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-[#050505]/80 backdrop-blur-md">
+    <nav class="fixed top-0 w-full z-50 border-b border-neutral-200 dark:border-white/10 bg-white/80 dark:bg-[#050505]/80 backdrop-blur-md transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <span class="font-bold text-lg tracking-tight hover-target">AD.</span>
-            <div class="flex gap-6 text-sm font-medium text-neutral-400">
-                <a href="#experience" class="hover:text-white transition-colors hover-target">Experience</a>
-                <a href="#contact" class="hover:text-white transition-colors hover-target">Contact</a>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex gap-6 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                    <a href="#experience" class="hover:text-black dark:hover:text-white transition-colors hover-target">Experience</a>
+                    <a href="#contact" class="hover:text-black dark:hover:text-white transition-colors hover-target">Contact</a>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors hover-target" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon (shown in dark mode) -->
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-white"></i>
+                    <!-- Moon Icon (shown in light mode) -->
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-neutral-900"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -104,18 +154,18 @@
     <header class="min-h-screen flex flex-col justify-center px-6 pt-20 relative max-w-7xl mx-auto">
         <div class="reveal">
             <p class="text-neutral-500 mb-4 font-mono text-sm tracking-widest uppercase">Based in Kolkata, India</p>
-            <h1 class="font-display text-[12vw] leading-[0.85] font-black uppercase mb-8">
+            <h1 class="font-display text-[12vw] leading-[0.85] font-black uppercase mb-8 text-neutral-900 dark:text-white transition-colors">
                 Abhijay <br>
-                <span class="text-neutral-500">Dutta</span>
+                <span class="text-neutral-400 dark:text-neutral-500">Dutta</span>
             </h1>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 reveal delay-100">
-            <div class="text-xl md:text-2xl text-neutral-300 leading-relaxed max-w-2xl">
+            <div class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl transition-colors">
                 Product-focused designer with a strong technical foundation. Designing end-to-end commerce and SaaS experiences for global clients.
             </div>
             <div class="flex flex-col justify-end items-start md:items-end gap-4">
-                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-white/20 px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 hover-target">
+                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-neutral-300 dark:border-white/20 px-8 py-4 rounded-full hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 hover-target">
                     <span>abhijaydutta123@gmail.com</span>
                     <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
                 </a>
@@ -124,29 +174,29 @@
     </header>
 
     <!-- Infinite Marquee Skills -->
-    <section class="border-y border-white/10 py-8 bg-neutral-900/20 overflow-hidden reveal">
+    <section class="border-y border-neutral-200 dark:border-white/10 py-8 bg-neutral-100 dark:bg-neutral-900/20 overflow-hidden reveal transition-colors">
         <div class="whitespace-nowrap flex w-[200%] animate-marquee">
             <!-- Duplicated content for seamless loop -->
-            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-700">
+            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-300 dark:text-neutral-700">
                 <span>USER JOURNEY MAPPING</span>
-                <span class="text-white">INTERACTION DESIGN</span>
+                <span class="text-neutral-800 dark:text-white">INTERACTION DESIGN</span>
                 <span>FIGMA</span>
-                <span class="text-white">AI WORKFLOWS</span>
+                <span class="text-neutral-800 dark:text-white">AI WORKFLOWS</span>
                 <span>DATA-INFORMED DESIGN</span>
-                <span class="text-white">SHOPIFY</span>
+                <span class="text-neutral-800 dark:text-white">SHOPIFY</span>
                 <span>ODOO</span>
-                <span class="text-white">NEXT.JS</span>
+                <span class="text-neutral-800 dark:text-white">NEXT.JS</span>
                 <span>ENTERPRISE UX</span>
             </div>
-            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-700">
+            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-300 dark:text-neutral-700">
                 <span>USER JOURNEY MAPPING</span>
-                <span class="text-white">INTERACTION DESIGN</span>
+                <span class="text-neutral-800 dark:text-white">INTERACTION DESIGN</span>
                 <span>FIGMA</span>
-                <span class="text-white">AI WORKFLOWS</span>
+                <span class="text-neutral-800 dark:text-white">AI WORKFLOWS</span>
                 <span>DATA-INFORMED DESIGN</span>
-                <span class="text-white">SHOPIFY</span>
+                <span class="text-neutral-800 dark:text-white">SHOPIFY</span>
                 <span>ODOO</span>
-                <span class="text-white">NEXT.JS</span>
+                <span class="text-neutral-800 dark:text-white">NEXT.JS</span>
                 <span>ENTERPRISE UX</span>
             </div>
         </div>
@@ -160,39 +210,42 @@
             
             <!-- Core Skills -->
             <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Core Competencies</h3>
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Core Competencies</h3>
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">End-to-End Product Design</span>
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Commerce Flows</span>
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Admin Experiences</span>
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">Design Systems</span>
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">A/B Testing</span>
-                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm hover:bg-white/10 transition-colors hover-target">AI Explainability</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">End-to-End Product Design</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Commerce Flows</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Admin Experiences</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Design Systems</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">A/B Testing</span>
+                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">AI Explainability</span>
                 </div>
             </div>
 
             <!-- Education -->
             <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Education</h3>
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Education</h3>
                 <div class="space-y-4">
                     <div class="hover-target">
-                        <h4 class="font-bold text-lg">B.Tech in Computer Science (IoT)</h4>
-                        <p class="text-neutral-400 text-sm mt-1">University of Engineering & Management, Kolkata</p>
+                        <h4 class="font-bold text-lg text-neutral-900 dark:text-white">B.Tech in Computer Science (IoT)</h4>
+                        <p class="text-neutral-600 dark:text-neutral-400 text-sm mt-1">University of Engineering & Management, Kolkata</p>
                         <div class="flex justify-between items-center mt-2 text-xs text-neutral-500 font-mono">
                             <span>Graduating May 2025</span>
-                            <span>8.0 CGPA</span>
+                            <span>7.77 CGPA</span>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-white/5">
-                        <p class="text-xs text-neutral-400"><span class="text-white font-medium">Thesis:</span> Ensuring Security and Transparency in E-Voting Systems through Blockchain.</p>
+                    <div class="pt-4 border-t border-neutral-200 dark:border-white/5">
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                            <span class="text-neutral-900 dark:text-white font-medium">Thesis:</span> 
+                            <a href="https://scholar.google.com/scholar?q=Ensuring+Security+and+Transparency+in+E-Voting+Systems+through+Blockchain+Technology" target="_blank" class="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Ensuring Security and Transparency in E-Voting Systems through Blockchain Technology</a>
+                        </p>
                     </div>
                 </div>
             </div>
 
             <!-- Tools -->
              <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Tools Stack</h3>
-                <div class="grid grid-cols-2 gap-y-2 text-sm text-neutral-400">
+                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Tools Stack</h3>
+                <div class="grid grid-cols-2 gap-y-2 text-sm text-neutral-600 dark:text-neutral-400">
                     <span>Figma / FigJam</span>
                     <span>Adobe XD</span>
                     <span>Jira / Confluence</span>
@@ -207,98 +260,98 @@
         <div class="lg:col-span-8 space-y-20" id="experience">
             
             <!-- Job 1 -->
-            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
                 
                 <header class="mb-6">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target">Abacus Digital</h2>
+                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Abacus Digital</h2>
                         <span class="font-mono text-sm text-neutral-500">Jan 2025 – Present</span>
                     </div>
-                    <p class="text-lg text-neutral-300">Technical Solutions Engineer</p>
+                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Technical Solutions Engineer</p>
                 </header>
 
-                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                        Led <span class="text-white font-medium">end-to-end design</span> of commerce and SaaS experiences, transitioning from execution to strategy.
+                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                        Led <span class="text-black dark:text-white font-medium">end-to-end design</span> of commerce and SaaS experiences, transitioning from execution to strategy.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
                         Partnered with Product and Sales to define workflows for billing, checkout, and admin dashboards.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                        Analyzed high-traffic platforms driving <span class="text-white font-medium">20-30% session growth</span> and <span class="text-white font-medium">10-15% checkout improvement</span> via flow simplification.
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                        Analyzed high-traffic platforms driving <span class="text-black dark:text-white font-medium">20-30% session growth</span> and <span class="text-black dark:text-white font-medium">10-15% checkout improvement</span> via flow simplification.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
                         Designed AI-assisted customer support interfaces and automated content workflows.
                     </li>
                 </ul>
             </article>
 
             <!-- Job 2 -->
-            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
                 
                 <header class="mb-6">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target">Go Bandanas</h2>
+                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Go Bandanas</h2>
                         <span class="font-mono text-sm text-neutral-500">Sep 2024 – Nov 2024</span>
                     </div>
-                    <p class="text-lg text-neutral-300">Web Developer & UI/UX Intern (Remote)</p>
+                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Developer & UI/UX Intern (Remote)</p>
                 </header>
 
-                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                        Designed end-to-end commerce journeys on <span class="text-white font-medium">Odoo</span> for a global pet lifestyle brand.
+                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                        Designed end-to-end commerce journeys on <span class="text-black dark:text-white font-medium">Odoo</span> for a global pet lifestyle brand.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                        Improved customer satisfaction by <span class="text-white font-medium">~25%</span> by iterating designs based on usability reviews.
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                        Improved customer satisfaction by <span class="text-black dark:text-white font-medium">~25%</span> by iterating designs based on usability reviews.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
                         Established consistent visual patterns to improve usability and brand coherence.
                     </li>
                 </ul>
             </article>
 
             <!-- Job 3 -->
-            <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
                 
                 <header class="mb-6">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target">Bharat Natural Elements</h2>
+                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Bharat Natural Elements</h2>
                         <span class="font-mono text-sm text-neutral-500">Mar 2024 – Jul 2024</span>
                     </div>
-                    <p class="text-lg text-neutral-300">Web Technologist Intern</p>
+                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Technologist Intern</p>
                 </header>
 
-                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
                         Designed a complex product catalog with advanced filtering and scalable IA.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                        Resulted in a <span class="text-white font-medium">30% increase</span> in inbound leads and <span class="text-white font-medium">20% growth</span> in sales within three months.
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                        Resulted in a <span class="text-black dark:text-white font-medium">30% increase</span> in inbound leads and <span class="text-black dark:text-white font-medium">20% growth</span> in sales within three months.
                     </li>
                 </ul>
             </article>
 
              <!-- Job 4 -->
-             <article class="group relative pl-8 border-l border-white/10 reveal hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-800 rounded-full group-hover:bg-white transition-colors duration-500"></div>
+             <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
+                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
                 
                 <header class="mb-6">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target">Perfect Career</h2>
+                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Perfect Career</h2>
                         <span class="font-mono text-sm text-neutral-500">May 2023 – Jul 2023</span>
                     </div>
-                    <p class="text-lg text-neutral-300">Web Developer & UI/UX Designer</p>
+                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Developer & UI/UX Designer</p>
                 </header>
 
-                <ul class="space-y-4 text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
+                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
                         Designed an admissions platform for 5,000+ users and 50+ institutions.
                     </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-600">
-                         Reduced form completion time by <span class="text-white font-medium">20%</span> through iterative UX improvements.
+                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
+                         Reduced form completion time by <span class="text-black dark:text-white font-medium">20%</span> through iterative UX improvements.
                     </li>
                 </ul>
             </article>
@@ -307,24 +360,24 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 bg-neutral-900/30 py-20" id="contact">
+    <footer class="border-t border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900/30 py-20 transition-colors" id="contact">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="font-display text-4xl md:text-6xl font-bold mb-8">Ready to collaborate?</h2>
+            <h2 class="font-display text-4xl md:text-6xl font-bold mb-8 text-neutral-900 dark:text-white">Ready to collaborate?</h2>
             
             <div class="flex flex-wrap justify-center gap-6 mb-12">
-                <a href="mailto:abhijaydutta123@gmail.com" class="hover-target px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform">
+                <a href="mailto:abhijaydutta123@gmail.com" class="hover-target px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full hover:scale-105 transition-transform">
                     Send an Email
                 </a>
-                <a href="https://www.linkedin.com/in/abhijay-dutta-a9678216a/" target="_blank" class="hover-target px-8 py-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
+                <a href="https://www.linkedin.com/in/abhijay-dutta-a9678216a/" target="_blank" class="hover-target px-8 py-4 border border-neutral-300 dark:border-white/20 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-neutral-900 dark:text-white">
                     LinkedIn Profile
                 </a>
-                <a href="tel:+916291444121" class="hover-target px-8 py-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
+                <a href="tel:+916291444121" class="hover-target px-8 py-4 border border-neutral-300 dark:border-white/20 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-neutral-900 dark:text-white">
                     +91 6291444121
                 </a>
             </div>
             
-            <p class="text-neutral-600 text-sm">
-                &copy; 2025 Abhijay Dutta. Designed & Engineered with bold intent.
+            <p class="text-neutral-500 text-sm">
+                &copy; 2025 Abhijay Dutta.
             </p>
         </div>
     </footer>
@@ -332,6 +385,26 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            if (html.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
 
         // Custom Cursor Logic
         const cursorDot = document.querySelector('.cursor-dot');
@@ -380,5 +453,4 @@
         });
     </script>
 </body>
-
 </html>
