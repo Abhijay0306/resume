@@ -1,0 +1,82 @@
+/* ─── GSAP Pre-animation States ──────────────────────────────────── */
+/*
+  These are initial invisible states that GSAP will animate FROM.
+  JS sets these directly via gsap.set() before animating,
+  so these classes are mostly documentation/fallback.
+*/
+
+/* Nav starts above viewport */
+[data-gsap="nav"] {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Hero eyebrow */
+[data-gsap="hero-eyebrow"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Hero title chars */
+.hero__title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Hero tagline / CTA */
+[data-gsap="hero-tagline"],
+[data-gsap="hero-cta"] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* Scroll reveal elements */
+[data-gsap="reveal"] {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+[data-gsap="reveal-left"] {
+  opacity: 0;
+  transform: translateX(-40px);
+  will-change: transform, opacity;
+}
+
+[data-gsap="reveal-scale"] {
+  opacity: 0;
+  transform: scale(0.92);
+  will-change: transform, opacity;
+}
+
+/* Stagger children */
+[data-gsap="stagger"] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: transform, opacity;
+}
+
+/* Tags stagger */
+[data-gsap="tags"] .tag {
+  opacity: 0;
+  transform: scale(0.85) translateY(8px);
+  will-change: transform, opacity;
+}
+
+/* ─── Progress Line (experience timeline) ────────────────────────── */
+.exp-card {
+  /* border-left starts at 0 height — GSAP draws it */
+  background-clip: padding-box;
+}
+
+/* ─── Noise texture overlay (optional premium touch) ─────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}

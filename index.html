@@ -1,510 +1,394 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhijay Dutta | Product Designer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    animation: {
-                        'spin-slow': 'spin 12s linear infinite',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Cursor Styles */
-        body {
-            cursor: none;
-        }
-        /* Mobile: Reset cursor to default */
-        @media (max-width: 768px) {
-            body {
-                cursor: auto;
-            }
-        }
-        
-        .cursor-dot,
-        .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-        
-        /* Light Mode Cursor */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #000;
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(0, 0, 0, 0.5);
-            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhijay Dutta | AI Engineer</title>
+  <meta name="description" content="AI Engineer with practical experience building production-grade AI systems using LLMs, RAG, and agentic workflows. Based in Kolkata, India.">
+  <meta name="author" content="Abhijay Dutta">
+  <meta property="og:title" content="Abhijay Dutta — AI Engineer">
+  <meta property="og:description" content="Building production-grade AI systems: LLMs, RAG pipelines, agentic workflows.">
+  <meta property="og:type" content="website">
 
-        /* Dark Mode Cursor Overrides */
-        .dark .cursor-dot {
-            background-color: #fff;
-        }
-        .dark .cursor-outline {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Hover state for cursor */
-        body:hover .cursor-outline.hovered {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-color: transparent;
-        }
-        .dark body:hover .cursor-outline.hovered {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: invert(1);
-        }
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
 
-        /* Marquee Animation */
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-            animation: marquee 20s linear infinite;
-        }
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-        /* Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4d4d4;
-            border-radius: 4px;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #333;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a3a3a3;
-        }
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Typography Tweaks */
-        .font-display {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            letter-spacing: -0.04em;
-        }
-    </style>
+  <!-- Apply dark class immediately to avoid flash of light mode -->
+  <script>
+    (function() {
+      const stored = localStorage.theme;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else if (stored === 'dark' || prefersDark) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-neutral-50 text-neutral-900 dark:bg-[#050505] dark:text-white font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 overflow-x-hidden relative">
 
-    <!-- Geometric Background Elements -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <!-- Circle Top Right -->
-        <div class="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full border border-neutral-200 dark:border-white/5 opacity-40 dark:opacity-20 animate-spin-slow duration-[60s]"></div>
-        <!-- Circle Top Right Inner -->
-        <div class="absolute top-20 right-20 w-[300px] h-[300px] rounded-full border border-dashed border-neutral-300 dark:border-white/10 opacity-40 dark:opacity-20"></div>
-        
-        <!-- Square Bottom Left -->
-        <div class="absolute bottom-40 -left-20 w-96 h-96 border border-neutral-200 dark:border-white/5 rotate-12 opacity-40 dark:opacity-20"></div>
-        
-        <!-- Grid Dots Middle -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 40px 40px;"></div>
+<body>
+
+  <!-- ── Geometric Background ───────────────────────────────────── -->
+  <div class="bg-geometry" aria-hidden="true">
+    <div class="bg-geometry__circle-outer"></div>
+    <div class="bg-geometry__circle-inner"></div>
+    <div class="bg-geometry__square"></div>
+    <div class="bg-geometry__dots"></div>
+  </div>
+
+  <!-- ── Custom Cursor ──────────────────────────────────────────── -->
+  <div class="cursor__dot"  aria-hidden="true" style="opacity:0"></div>
+  <div class="cursor__ring" aria-hidden="true" style="opacity:0"></div>
+
+  <!-- ── Navigation ─────────────────────────────────────────────── -->
+  <nav class="nav" data-gsap="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Home">AD.</a>
+
+      <div class="nav__links">
+        <a href="#experience" class="nav__link">Experience</a>
+        <a href="#projects"   class="nav__link">Projects</a>
+        <a href="#contact"    class="nav__link">Contact</a>
+
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" class="nav__theme-btn" aria-label="Toggle dark mode">
+          <!-- Sun (shown in dark) -->
+          <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2"  x2="12" y2="6"/>
+            <line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="4.22" y1="4.22" x2="7.05" y2="7.05"/>
+            <line x1="16.95" y1="16.95" x2="19.78" y2="19.78"/>
+            <line x1="2" y1="12"  x2="6"  y2="12"/>
+            <line x1="18" y1="12" x2="22" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="7.05" y2="16.95"/>
+            <line x1="16.95" y1="7.05" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon (shown in light) -->
+          <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────────── -->
+  <header class="hero" id="hero">
+
+    <p class="hero__eyebrow" data-gsap="hero-eyebrow">
+      Based in Kolkata, India &nbsp;·&nbsp; AI Engineer
+    </p>
+
+    <h1 class="hero__title" aria-label="Abhijay Dutta">
+      Abhijay<br><span class="hero__title-dim">Dutta</span>
+    </h1>
+
+    <div class="hero__bottom">
+      <p class="hero__tagline" data-gsap="hero-tagline">
+        Building <strong>production-grade AI systems</strong> —
+        LLMs, RAG pipelines, and agentic workflows.
+        Focused on <strong>shipping reliable AI features</strong>
+        from concept to production.
+      </p>
+
+      <div class="hero__cta" data-gsap="hero-cta">
+        <a href="mailto:abhijaydutta123@gmail.com" class="btn-outline" id="hero-email-btn">
+          abhijaydutta123@gmail.com
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/abhijayduttaofficial" target="_blank" rel="noopener" class="btn-outline" id="hero-linkedin-btn">
+          LinkedIn
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
+  </header>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-neutral-200 dark:border-white/10 bg-white/80 dark:bg-[#050505]/80 backdrop-blur-md transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="font-bold text-lg tracking-tight hover-target">AD.</span>
-            
-            <div class="flex items-center gap-6">
-                <div class="flex gap-6 text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                    <a href="#experience" class="hover:text-black dark:hover:text-white transition-colors hover-target">Experience</a>
-                    <a href="#contact" class="hover:text-black dark:hover:text-white transition-colors hover-target">Contact</a>
-                </div>
-                
-                <!-- Dark Mode Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors hover-target" aria-label="Toggle Dark Mode">
-                    <!-- Sun Icon (shown in dark mode) -->
-                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-white"></i>
-                    <!-- Moon Icon (shown in light mode) -->
-                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-neutral-900"></i>
-                </button>
-            </div>
+  <!-- ── Marquee ─────────────────────────────────────────────────── -->
+  <section class="marquee-section" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">LLM Integration</span>
+      <span class="marquee-item marquee-item--highlight">RAG Systems</span>
+      <span class="marquee-item">LangChain</span>
+      <span class="marquee-item marquee-item--highlight">Agentic Workflows</span>
+      <span class="marquee-item">Vector Databases</span>
+      <span class="marquee-item marquee-item--highlight">Python</span>
+      <span class="marquee-item">Prompt Engineering</span>
+      <span class="marquee-item marquee-item--highlight">LlamaIndex</span>
+      <span class="marquee-item">FastAPI</span>
+      <span class="marquee-item marquee-item--highlight">Evaluation Frameworks</span>
+      <span class="marquee-item">Docker</span>
+      <span class="marquee-item marquee-item--highlight">Production AI</span>
+    </div>
+  </section>
+
+  <!-- ── Main Content ────────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- ── Sidebar ───────────────────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <!-- Core Competencies -->
+      <div data-gsap="reveal">
+        <p class="sidebar__section-label">Core Competencies</p>
+        <div class="tag-cloud" data-gsap="tags">
+          <span class="tag">Shipping Discipline</span>
+          <span class="tag">Full-Stack AI Systems</span>
+          <span class="tag">RAG Infrastructure</span>
+          <span class="tag">LLM Integration</span>
+          <span class="tag">Agentic Workflows</span>
+          <span class="tag">Rapid Model Iteration</span>
+          <span class="tag">Evaluation Frameworks</span>
+          <span class="tag">Production Reliability</span>
+          <span class="tag">Clean Architecture</span>
+          <span class="tag">Independent Execution</span>
         </div>
-    </nav>
+      </div>
 
-    <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col justify-center px-6 pt-20 relative max-w-7xl mx-auto z-10">
-        <div class="reveal">
-            <p class="text-neutral-500 mb-4 font-mono text-sm tracking-widest uppercase">Based in Kolkata, India</p>
-            <h1 class="font-display text-[12vw] leading-[0.85] font-black uppercase mb-8 text-neutral-900 dark:text-white transition-colors">
-                Abhijay <br>
-                <span class="text-neutral-400 dark:text-neutral-500">Dutta</span>
-            </h1>
+      <!-- Technical Skills -->
+      <div data-gsap="reveal">
+        <p class="sidebar__section-label">Technical Stack</p>
+        <div class="tools-grid">
+          <span class="tools-grid__item">Python</span>
+          <span class="tools-grid__item">JavaScript</span>
+          <span class="tools-grid__item">LangChain</span>
+          <span class="tools-grid__item">LlamaIndex</span>
+          <span class="tools-grid__item">OpenAI API</span>
+          <span class="tools-grid__item">Anthropic API</span>
+          <span class="tools-grid__item">DeepSeek API</span>
+          <span class="tools-grid__item">Flask / FastAPI</span>
+          <span class="tools-grid__item">React</span>
+          <span class="tools-grid__item">Docker</span>
+          <span class="tools-grid__item">Vector DBs</span>
+          <span class="tools-grid__item">SQL / NoSQL</span>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 reveal delay-100 relative">
-            <div class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl transition-colors">
-                Product-focused designer with a strong technical foundation. Designing end-to-end commerce and SaaS experiences for global clients.
-            </div>
-            <div class="flex flex-col justify-end items-start md:items-end gap-4">
-                <a href="mailto:abhijaydutta123@gmail.com" class="group flex items-center gap-3 border border-neutral-300 dark:border-white/20 px-8 py-4 rounded-full hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 hover-target bg-white/50 dark:bg-black/50 backdrop-blur-sm">
-                    <span>abhijaydutta123@gmail.com</span>
-                    <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
-                </a>
-            </div>
+      </div>
+
+      <!-- Education -->
+      <div data-gsap="reveal">
+        <p class="sidebar__section-label">Education</p>
+        <div class="edu-block">
+          <h2 class="edu-block__title">B.Tech, CS &amp; Engineering</h2>
+          <p class="edu-block__school">IoT Specialization — University of Engineering &amp; Management, Kolkata</p>
+          <div class="edu-block__meta">
+            <span>May 2025</span>
+            <span>GPA 7.9 / 10</span>
+          </div>
+          <div class="divider"></div>
+          <p style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;font-family:var(--font-mono)">Thesis — Published in ICDMIS 2024</p>
+          <a href="https://link.springer.com/chapter/10.1007/978-981-96-6060-5_33"
+             target="_blank" rel="noopener"
+             class="edu-block__thesis-link"
+             id="thesis-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Ensuring Security and Transparency in E-Voting Systems through Blockchain Technology
+          </a>
         </div>
-    </header>
+      </div>
 
-    <!-- Infinite Marquee Skills -->
-    <section class="border-y border-neutral-200 dark:border-white/10 py-8 bg-neutral-100 dark:bg-neutral-900/20 overflow-hidden reveal transition-colors relative z-10">
-        <div class="whitespace-nowrap flex w-[200%] animate-marquee">
-            <!-- Duplicated content for seamless loop -->
-            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-300 dark:text-neutral-700">
-                <span>USER JOURNEY MAPPING</span>
-                <span class="text-neutral-800 dark:text-white">INTERACTION DESIGN</span>
-                <span>FIGMA</span>
-                <span class="text-neutral-800 dark:text-white">AI WORKFLOWS</span>
-                <span>DATA-INFORMED DESIGN</span>
-                <span class="text-neutral-800 dark:text-white">SHOPIFY</span>
-                <span>ODOO</span>
-                <span class="text-neutral-800 dark:text-white">NEXT.JS</span>
-                <span>ENTERPRISE UX</span>
+    </aside>
+
+    <!-- ── Experience + Projects ──────────────────────────────────── -->
+    <div class="experience-col">
+
+      <!-- ── Experience ───────────────────────────────────────────── -->
+      <section id="experience">
+        <h2 class="section-heading">Professional Experience</h2>
+
+        <!-- Abacus Digital -->
+        <article class="exp-card" data-gsap="reveal-left">
+          <div class="exp-card__header">
+            <div class="exp-card__top">
+              <span class="exp-card__company">Abacus Digital</span>
+              <span class="exp-card__date">Jan 2025 – Present</span>
             </div>
-            <div class="flex gap-16 items-center px-8 font-display text-4xl font-bold text-neutral-300 dark:text-neutral-700">
-                <span>USER JOURNEY MAPPING</span>
-                <span class="text-neutral-800 dark:text-white">INTERACTION DESIGN</span>
-                <span>FIGMA</span>
-                <span class="text-neutral-800 dark:text-white">AI WORKFLOWS</span>
-                <span>DATA-INFORMED DESIGN</span>
-                <span class="text-neutral-800 dark:text-white">SHOPIFY</span>
-                <span>ODOO</span>
-                <span class="text-neutral-800 dark:text-white">NEXT.JS</span>
-                <span>ENTERPRISE UX</span>
+            <p class="exp-card__role">Technical Solutions Engineer</p>
+            <p class="exp-card__location">Kolkata, West Bengal</p>
+          </div>
+          <ul class="exp-card__bullets" data-gsap="stagger">
+            <li class="exp-card__bullet">
+              Architect and ship <strong>production AI features</strong> for enterprise clients — AI-powered chatbots, virtual assistants, and agentic systems handling complex customer workflows.
+            </li>
+            <li class="exp-card__bullet">
+              Built and optimised <strong>RAG pipelines</strong>: document ingestion with advanced parsing, chunking strategies, vector storage integration, and retrieval optimisation for knowledge-grounded applications.
+            </li>
+            <li class="exp-card__bullet">
+              Developed LLM-based automation workflows using <strong>LangChain</strong> for content generation, knowledge retrieval, and intelligent reporting — reducing manual effort and operational turnaround time.
+            </li>
+            <li class="exp-card__bullet">
+              Established <strong>evaluation frameworks and monitoring dashboards</strong> to track model performance, user satisfaction, and system reliability across production deployments.
+            </li>
+            <li class="exp-card__bullet">
+              Rapidly integrated and tested emerging models including <strong>Claude, GPT-4, and open-source alternatives</strong>; pragmatically evaluated trade-offs between cost, latency, and quality.
+            </li>
+            <li class="exp-card__bullet">
+              Focused on <strong>system reliability</strong>: robust error handling, caching, async workflows, structured logging, and comprehensive testing for production stability.
+            </li>
+          </ul>
+        </article>
+
+        <!-- Go Bandanas -->
+        <article class="exp-card" style="margin-top:4rem" data-gsap="reveal-left">
+          <div class="exp-card__header">
+            <div class="exp-card__top">
+              <span class="exp-card__company">Go Bandanas</span>
+              <span class="exp-card__date">Sep 2024 – Nov 2024</span>
             </div>
-        </div>
-    </section>
+            <p class="exp-card__role">Web Developer — E-Commerce Platform Optimisation</p>
+            <p class="exp-card__location">Luxembourg (Remote)</p>
+          </div>
+          <ul class="exp-card__bullets" data-gsap="stagger">
+            <li class="exp-card__bullet">
+              Optimised <strong>Odoo-based e-commerce platform</strong> for performance, usability, and system reliability; improved user experience metrics by <strong>25%</strong>.
+            </li>
+            <li class="exp-card__bullet">
+              Collaborated cross-functionally with product and business stakeholders to ensure technical solutions aligned with business objectives.
+            </li>
+          </ul>
+        </article>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
-        
-        <!-- Left Sidebar (Skills & Education) -->
-        <aside class="lg:col-span-4 space-y-16 reveal h-fit lg:sticky lg:top-24">
-            
-            <!-- Core Skills -->
-            <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Core Competencies</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">End-to-End Product Design</span>
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Commerce Flows</span>
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Admin Experiences</span>
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">Design Systems</span>
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">A/B Testing</span>
-                    <span class="px-3 py-1 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-full text-sm hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors hover-target">AI Explainability</span>
-                </div>
+        <!-- Bharat Natural Elements -->
+        <article class="exp-card" style="margin-top:4rem" data-gsap="reveal-left">
+          <div class="exp-card__header">
+            <div class="exp-card__top">
+              <span class="exp-card__company">Bharat Natural Elements</span>
+              <span class="exp-card__date">Mar 2024 – Jul 2024</span>
             </div>
+            <p class="exp-card__role">Web Technologist — Product System Development</p>
+            <p class="exp-card__location">Bangalore, Karnataka</p>
+          </div>
+          <ul class="exp-card__bullets" data-gsap="stagger">
+            <li class="exp-card__bullet">
+              Built scalable, interactive <strong>product catalog system</strong> with advanced filtering and real-time updates; shipped within tight timeline constraints.
+            </li>
+            <li class="exp-card__bullet">
+              System drove measurable business impact: <strong>30% increase in customer inquiries</strong> and <strong>20% sales growth</strong> within three months.
+            </li>
+          </ul>
+        </article>
 
-            <!-- Education -->
-            <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Education</h3>
-                <div class="space-y-4">
-                    <div class="hover-target">
-                        <h4 class="font-bold text-lg text-neutral-900 dark:text-white">B.Tech in Computer Science (IoT)</h4>
-                        <p class="text-neutral-600 dark:text-neutral-400 text-sm mt-1">University of Engineering & Management, Kolkata</p>
-                        <div class="flex justify-between items-center mt-2 text-xs text-neutral-500 font-mono">
-                            <span>Graduating May 2025</span>
-                            <span>7.77 CGPA</span>
-                        </div>
-                    </div>
-                    <div class="pt-4 border-t border-neutral-200 dark:border-white/5">
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-                            <span class="text-neutral-900 dark:text-white font-medium">Thesis:</span> 
-                        </p>
-                        <a href="https://link.springer.com/chapter/10.1007/978-981-96-6060-5_33" target="_blank" class="group flex items-start gap-2 p-2 -ml-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-white/5 transition-colors hover-target">
-                            <span class="text-sm font-medium text-blue-600 dark:text-blue-400 border-b border-blue-600/20 group-hover:border-blue-600 dark:border-blue-400/20 dark:group-hover:border-blue-400 transition-colors leading-relaxed">
-                                Ensuring Security and Transparency in E-Voting Systems through Blockchain Technology
-                            </span>
-                            <i data-lucide="external-link" class="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+      </section>
 
-            <!-- Tools -->
-             <div>
-                <h3 class="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-6 border-b border-neutral-200 dark:border-white/10 pb-2">Tools Stack</h3>
-                <div class="grid grid-cols-2 gap-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <span>Figma / FigJam</span>
-                    <span>Adobe XD</span>
-                    <span>Jira / Confluence</span>
-                    <span>Google Analytics</span>
-                    <span>Hotjar</span>
-                    <span>Odoo / Shopify</span>
-                </div>
-            </div>
-        </aside>
+      <!-- ── Projects ──────────────────────────────────────────────── -->
+      <section id="projects">
+        <h2 class="section-heading">Selected Projects</h2>
 
-        <!-- Right Content (Experience) -->
-        <div class="lg:col-span-8 space-y-20" id="experience">
-            
-            <!-- Job 1 -->
-            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
-                
-                <header class="mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Abacus Digital</h2>
-                        <span class="font-mono text-sm text-neutral-500">Jan 2025 – Present</span>
-                    </div>
-                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Technical Solutions Engineer</p>
-                </header>
+        <!-- BlockVote -->
+        <article class="project-card" data-gsap="reveal-scale" id="project-blockvote">
+          <div class="project-card__header">
+            <h3 class="project-card__title">BlockVote — Blockchain Voting System</h3>
+            <span class="project-card__badge">Solidity · React</span>
+          </div>
+          <p class="project-card__meta">Course Project, University of Engineering &amp; Management &nbsp;·&nbsp; Jan 2024 – May 2024</p>
+          <ul class="project-card__bullets">
+            <li class="project-card__bullet">
+              Engineered production-ready <strong>blockchain-based e-voting system</strong> with emphasis on security, transparency, and system reliability.
+            </li>
+            <li class="project-card__bullet">
+              Designed and deployed <strong>smart contracts in Solidity</strong> with full-stack frontend development using React and secure wallet integration.
+            </li>
+            <li class="project-card__bullet">
+              Processed <strong>3,000+ votes in real-time</strong> with zero fraud detected; achieved 30% reduction in vote manipulation risk and 99%+ system uptime.
+            </li>
+            <li class="project-card__bullet">
+              Focused on clean architecture: modular codebase design, comprehensive logging, and structured testing practices.
+            </li>
+          </ul>
+        </article>
 
-                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Led <span class="text-black dark:text-white font-medium">end-to-end design</span> of commerce and SaaS experiences, transitioning from execution to strategy.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Partnered with Product and Sales to define workflows for billing, checkout, and admin dashboards.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Analyzed high-traffic platforms driving <span class="text-black dark:text-white font-medium">20-30% session growth</span> and <span class="text-black dark:text-white font-medium">10-15% checkout improvement</span> via flow simplification.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Designed AI-assisted customer support interfaces and automated content workflows.
-                    </li>
-                </ul>
-            </article>
+        <!-- Parkinson's Diagnostic -->
+        <article class="project-card" style="margin-top:1.5rem" data-gsap="reveal-scale" id="project-parkinsons">
+          <div class="project-card__header">
+            <h3 class="project-card__title">Voice-Based Parkinson's Diagnostic System</h3>
+            <span class="project-card__badge">Python · scikit-learn</span>
+          </div>
+          <p class="project-card__meta">Course Project, University of Engineering &amp; Management &nbsp;·&nbsp; Dec 2022 – May 2023</p>
+          <ul class="project-card__bullets">
+            <li class="project-card__bullet">
+              Developed end-to-end <strong>ML system for Parkinson's detection</strong> from vocal biomarkers using Python and scikit-learn.
+            </li>
+            <li class="project-card__bullet">
+              Implemented rigorous evaluation methodology: achieved <strong>87% accuracy</strong> on validated datasets with detailed metric reporting including precision, recall, F1-score, and ROC-AUC.
+            </li>
+            <li class="project-card__bullet">
+              Built data preprocessing pipeline with <strong>feature engineering and cross-validation</strong>; emphasis on reproducibility and robust evaluation practices.
+            </li>
+          </ul>
+        </article>
 
-            <!-- Job 2 -->
-            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
-                
-                <header class="mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Go Bandanas</h2>
-                        <span class="font-mono text-sm text-neutral-500">Sep 2024 – Nov 2024</span>
-                    </div>
-                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Developer & UI/UX Intern (Remote)</p>
-                </header>
+      </section>
 
-                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Designed end-to-end commerce journeys on <span class="text-black dark:text-white font-medium">Odoo</span> for a global pet lifestyle brand.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Improved customer satisfaction by <span class="text-black dark:text-white font-medium">~25%</span> by iterating designs based on usability reviews.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Established consistent visual patterns to improve usability and brand coherence.
-                    </li>
-                </ul>
-            </article>
+    </div>
+    <!-- /experience-col -->
 
-            <!-- Job 3 -->
-            <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
-                
-                <header class="mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Bharat Natural Elements</h2>
-                        <span class="font-mono text-sm text-neutral-500">Mar 2024 – Jul 2024</span>
-                    </div>
-                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Technologist Intern</p>
-                </header>
+  </main>
 
-                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Designed a complex product catalog with advanced filtering and scalable IA.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Resulted in a <span class="text-black dark:text-white font-medium">30% increase</span> in inbound leads and <span class="text-black dark:text-white font-medium">20% growth</span> in sales within three months.
-                    </li>
-                </ul>
-            </article>
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <h2 class="footer__heading" data-gsap="reveal">
+        Let's build something.
+      </h2>
 
-             <!-- Job 4 -->
-             <article class="group relative pl-8 border-l border-neutral-300 dark:border-white/10 reveal hover:border-black dark:hover:border-white transition-colors duration-500">
-                <div class="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-neutral-300 dark:bg-neutral-800 rounded-full group-hover:bg-black dark:group-hover:bg-white transition-colors duration-500"></div>
-                
-                <header class="mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
-                        <h2 class="text-3xl font-bold hover-target text-neutral-900 dark:text-white">Perfect Career</h2>
-                        <span class="font-mono text-sm text-neutral-500">May 2023 – Jul 2023</span>
-                    </div>
-                    <p class="text-lg text-neutral-700 dark:text-neutral-300">Web Developer & UI/UX Designer</p>
-                </header>
+      <div class="footer__links" data-gsap="stagger">
+        <a href="mailto:abhijaydutta123@gmail.com"
+           class="btn-primary"
+           id="footer-email-btn">
+          Send an Email
+        </a>
+        <a href="https://linkedin.com/in/abhijayduttaofficial"
+           target="_blank" rel="noopener"
+           class="btn-outline"
+           id="footer-linkedin-btn">
+          LinkedIn Profile
+        </a>
+        <a href="tel:+916291444121"
+           class="btn-outline"
+           id="footer-phone-btn">
+          +91 6291444121
+        </a>
+      </div>
 
-                <ul class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed list-none">
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                        Designed an admissions platform for 5,000+ users and 50+ institutions.
-                    </li>
-                    <li class="relative pl-6 before:content-['—'] before:absolute before:left-0 before:text-neutral-400 dark:before:text-neutral-600">
-                         Reduced form completion time by <span class="text-black dark:text-white font-medium">20%</span> through iterative UX improvements.
-                    </li>
-                </ul>
-            </article>
+      <p class="footer__copy">© 2025 Abhijay Dutta. Kolkata, India.</p>
+    </div>
+  </footer>
 
-        </div>
-    </main>
+  <!-- ── Download FAB ────────────────────────────────────────────── -->
+  <a href="Abhijay_Dutta_Product_Designer.pdf"
+     download="Abhijay_Dutta_Product_Designer.pdf"
+     class="fab-download"
+     id="download-fab"
+     aria-label="Download CV PDF">
+    Download CV
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+  </a>
 
-    <!-- Footer -->
-    <footer class="border-t border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900/30 py-20 transition-colors relative z-10" id="contact">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="font-display text-4xl md:text-6xl font-bold mb-8 text-neutral-900 dark:text-white">Ready to collaborate?</h2>
-            
-            <div class="flex flex-wrap justify-center gap-6 mb-12">
-                <a href="mailto:abhijaydutta123@gmail.com" class="hover-target px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full hover:scale-105 transition-transform">
-                    Send an Email
-                </a>
-                <a href="https://www.linkedin.com/in/abhijay-dutta-a9678216a/" target="_blank" class="hover-target px-8 py-4 border border-neutral-300 dark:border-white/20 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-neutral-900 dark:text-white">
-                    LinkedIn Profile
-                </a>
-                <a href="tel:+916291444121" class="hover-target px-8 py-4 border border-neutral-300 dark:border-white/20 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-neutral-900 dark:text-white">
-                    +91 6291444121
-                </a>
-            </div>
-            
-            <p class="text-neutral-500 text-sm">
-                &copy; 2025 Abhijay Dutta.
-            </p>
-        </div>
-    </footer>
+  <!-- ── JS (module) ─────────────────────────────────────────────── -->
+  <script type="module" src="js/main.js"></script>
 
-    <!-- Floating Download Button -->
-    <a
-  href="https://raw.githubusercontent.com/Abhijay0306/resume/7e710baad438a1e37db50c8b7aa33fbd58af269c/Abhijay_Dutta_Product_Designer.pdf"
-  download="Abhijay_Dutta_Product_Designer.pdf"
-  class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-neutral-900 dark:bg-white text-white dark:text-black px-6 py-4 rounded-full shadow-2xl hover:scale-105 transition-transform duration-300 group hover-target border border-neutral-800 dark:border-neutral-200"
->
-  <span class="font-bold tracking-wide">Download CV</span>
-  <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
-</a>
-
-
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Dark Mode Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        // 1. Check local storage or system preference on load
-        const updateTheme = () => {
-             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                html.classList.add('dark');
-            } else {
-                html.classList.remove('dark');
-            }
-        };
-        
-        // Initial check
-        updateTheme();
-
-        // 2. Listen for System Theme Changes (if user hasn't overridden manually)
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (!('theme' in localStorage)) {
-                if (event.matches) {
-                    html.classList.add('dark');
-                } else {
-                    html.classList.remove('dark');
-                }
-            }
-        });
-
-        // 3. Manual Toggle
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            if (html.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
-
-        // Custom Cursor Logic
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        const hoverTargets = document.querySelectorAll('.hover-target');
-
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Add a tiny delay to the outline for fluid feel
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
-        // Add hover effect to interactive elements
-        hoverTargets.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.classList.add('hovered');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.classList.remove('hovered');
-            });
-        });
-
-        // Intersection Observer for Reveal on Scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
-
-
-
-

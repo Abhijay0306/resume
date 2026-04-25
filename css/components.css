@@ -1,0 +1,344 @@
+/* ─── Custom Cursor ──────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor__ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.cursor--hover .cursor__ring {
+  opacity: 1;
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 768px) {
+  .cursor__dot, .cursor__ring { display: none; }
+}
+
+/* ─── Skill Tags ─────────────────────────────────────────────────── */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.tag:hover {
+  background: var(--tag-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+/* ─── Experience Card ────────────────────────────────────────────── */
+.exp-card {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1.5px solid var(--border);
+  transition: border-color 0.4s ease;
+}
+
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: background 0.4s ease, transform 0.4s ease;
+}
+
+.exp-card:hover { border-color: var(--text-primary); }
+.exp-card:hover::before {
+  background: var(--text-primary);
+  transform: scale(1.4);
+}
+
+.exp-card__header {
+  margin-bottom: 1.5rem;
+}
+
+.exp-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .exp-card__top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.exp-card__company {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.exp-card__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.exp-card__role {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.exp-card__location {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 0.2rem;
+}
+
+.exp-card__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.exp-card__bullet {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.exp-card__bullet::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.exp-card__bullet strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ─── Project Card ───────────────────────────────────────────────── */
+.project-card {
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-muted);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+  cursor: none;
+}
+
+.project-card:hover {
+  border-color: var(--border-strong);
+  background: var(--tag-hover);
+  transform: translateY(-3px);
+}
+
+.project-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.project-card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.project-card__meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+}
+
+.project-card__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.project-card__bullet {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.project-card__bullet::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 1.2em;
+  line-height: 1.4;
+}
+
+.project-card__bullet strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ─── Tools Grid ─────────────────────────────────────────────────── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.tools-grid__item {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+
+.tools-grid__item:hover { color: var(--text-primary); }
+
+/* ─── Education Block ────────────────────────────────────────────── */
+.edu-block__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.edu-block__school {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.edu-block__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.edu-block__thesis-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-muted);
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.82rem;
+  color: #4f8ef7;
+  line-height: 1.5;
+  cursor: none;
+}
+
+.edu-block__thesis-link:hover {
+  border-color: #4f8ef7;
+  background: rgba(79, 142, 247, 0.05);
+}
+
+.edu-block__thesis-link svg {
+  width: 13px;
+  height: 13px;
+  stroke: #4f8ef7;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ─── Competency List ────────────────────────────────────────────── */
+.competency-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.competency-item__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.competency-item__desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── Divider ─────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.5rem 0;
+}

@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── CSS Custom Properties ─────────────────────────────────────── */
+:root {
+  /* Colors — Light */
+  --bg:            #f8f8f7;
+  --bg-secondary:  #f0efed;
+  --surface:       #ffffff;
+  --surface-muted: rgba(0,0,0,0.04);
+  --border:        rgba(0,0,0,0.1);
+  --border-strong: rgba(0,0,0,0.18);
+  --text-primary:  #0a0a0a;
+  --text-secondary:#444;
+  --text-muted:    #888;
+  --accent:        #0a0a0a;
+  --accent-inv:    #ffffff;
+  --tag-bg:        rgba(0,0,0,0.05);
+  --tag-hover:     rgba(0,0,0,0.1);
+  --nav-bg:        rgba(248,248,247,0.85);
+  --scrollbar:     #ccc;
+  --scrollbar-hover:#aaa;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Spacing */
+  --nav-h: 64px;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html.dark {
+  --bg:            #080808;
+  --bg-secondary:  #111;
+  --surface:       #111;
+  --surface-muted: rgba(255,255,255,0.04);
+  --border:        rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
+  --text-primary:  #f0f0ee;
+  --text-secondary:#aaa;
+  --text-muted:    #555;
+  --accent:        #f0f0ee;
+  --accent-inv:    #080808;
+  --tag-bg:        rgba(255,255,255,0.05);
+  --tag-hover:     rgba(255,255,255,0.1);
+  --nav-bg:        rgba(8,8,8,0.85);
+  --scrollbar:     #2a2a2a;
+  --scrollbar-hover:#444;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 768px) {
+  body { cursor: auto; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+img { display: block; max-width: 100%; }
+
+/* ─── Selection ──────────────────────────────────────────────────── */
+::selection {
+  background: var(--text-primary);
+  color: var(--bg);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+
+/* ─── Typography helpers ─────────────────────────────────────────── */
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.text-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Visibility helpers for GSAP initial states ─────────────────── */
+.gsap-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
