@@ -156,23 +156,37 @@
 }
 
 .hero__title {
-  font-size: clamp(4rem, 12vw, 11rem);
+  font-size: clamp(3.2rem, 13vw, 10.5rem);
   font-weight: 900;
-  line-height: 0.88;
+  line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: var(--text-primary);
   margin-bottom: 2.5rem;
 }
 
-@media (max-width: 480px) {
-  .hero__title {
-    font-size: clamp(3rem, 15vw, 5rem);
-  }
+/* Each word on its own line — immune to GSAP innerHTML splitting */
+.hero__title-line {
+  display: block;
+  overflow: hidden; /* clips the char animation */
 }
 
 .hero__title-dim {
   color: var(--text-muted);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .hero__title {
+    font-size: clamp(3rem, 14vw, 6rem);
+  }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .hero__title {
+    font-size: clamp(2.8rem, 16vw, 4.5rem);
+  }
 }
 
 /* Char spans for GSAP SplitText-like animation */
@@ -184,15 +198,15 @@
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: flex-end;
-  gap: 3rem;
-  margin-top: 3rem;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .hero__tagline {
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
   color: var(--text-secondary);
-  line-height: 1.65;
-  max-width: 560px;
+  line-height: 1.7;
+  max-width: 520px;
 }
 
 .hero__tagline strong {
@@ -203,7 +217,7 @@
 .hero__cta {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.65rem;
   align-items: flex-end;
 }
 
@@ -211,10 +225,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.85rem 1.75rem;
+  padding: 0.8rem 1.5rem;
   border: 1px solid var(--border-strong);
   border-radius: 100px;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-primary);
   background: transparent;
@@ -228,18 +242,42 @@
   border-color: var(--text-primary);
 }
 .btn-outline svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   stroke: currentColor;
   transition: transform 0.2s ease;
 }
 .btn-outline:hover svg { transform: rotate(45deg) translate(2px, -2px); }
 
-@media (max-width: 768px) {
+/* Tablet — stack hero bottom */
+@media (max-width: 860px) {
   .hero__bottom {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  .hero__cta { align-items: flex-start; }
+  .hero__cta {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .hero {
+    padding-bottom: 3rem;
+  }
+  .hero__eyebrow {
+    font-size: 0.62rem;
+  }
+  .hero__cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-outline {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8rem;
+  }
 }
 
 /* ─── Marquee ────────────────────────────────────────────────────── */
@@ -278,33 +316,56 @@
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 5rem;
+  grid-template-columns: 300px 1fr;
+  gap: 4rem;
   position: relative;
   z-index: 10;
 }
 
+/* Tablet — collapse sidebar above content */
 @media (max-width: 1024px) {
   .main-content {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3.5rem;
+    padding: 4rem 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .main-content {
+    padding: 3rem 1.25rem;
+    gap: 3rem;
   }
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────────── */
 .sidebar {
   position: sticky;
-  top: calc(var(--nav-h) + 2rem);
+  top: calc(var(--nav-h) + 1.5rem);
   height: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
+  gap: 3rem;
 }
 
 @media (max-width: 1024px) {
-  .sidebar { position: static; }
+  .sidebar {
+    position: static;
+    /* On tablet/mobile show as two-col grid for compactness */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
 }
 
 .sidebar__section-label {
@@ -322,7 +383,13 @@
 .experience-col {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 4rem;
+}
+
+@media (max-width: 540px) {
+  .experience-col {
+    gap: 3rem;
+  }
 }
 
 /* ─── Section Headings (right column) ───────────────────────────── */
@@ -348,7 +415,7 @@
 .footer {
   border-top: 1px solid var(--border);
   background: var(--bg-secondary);
-  padding: 7rem 2rem;
+  padding: 6rem 2rem;
   position: relative;
   z-index: 10;
 }
@@ -360,11 +427,11 @@
 }
 
 .footer__heading {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 6vw, 5rem);
   font-weight: 900;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   line-height: 1;
 }
 
@@ -372,8 +439,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3.5rem;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 540px) {
+  .footer {
+    padding: 4rem 1.25rem;
+  }
+  .footer__links {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .btn-primary {
@@ -401,31 +478,40 @@
 /* ─── Download FAB ───────────────────────────────────────────────── */
 .fab-download {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   z-index: 200;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.5rem;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
   background: var(--text-primary);
   color: var(--bg);
   border-radius: 100px;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   cursor: none;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
   transition: transform 0.2s, box-shadow 0.2s;
   letter-spacing: 0.02em;
 }
 .fab-download:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
 .fab-download svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
   transition: transform 0.2s;
 }
 .fab-download:hover svg { transform: translateY(2px); }
+
+@media (max-width: 540px) {
+  .fab-download {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.72rem;
+  }
+}

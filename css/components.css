@@ -118,10 +118,19 @@
 }
 
 .exp-card__company {
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
+}
+
+@media (max-width: 540px) {
+  .exp-card {
+    padding-left: 1.25rem;
+  }
+  .exp-card__bullet {
+    font-size: 0.85rem;
+  }
 }
 
 .exp-card__date {
@@ -252,7 +261,13 @@
 .tools-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 1.5rem;
+  gap: 0.4rem 1.25rem;
+}
+
+@media (max-width: 400px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tools-grid__item {
